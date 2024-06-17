@@ -41,6 +41,7 @@ export type GaugeConfig = {
   textColor: string;
   waveTextColor: string;
   toFixed: number;
+  isVisible:boolean;
 };
 
 function liquidFillGaugeDefaultSettings(): GaugeConfig {
@@ -66,6 +67,7 @@ function liquidFillGaugeDefaultSettings(): GaugeConfig {
     textColor: '#045681', // The color of the value text when the wave does not overlap it.
     waveTextColor: '#A4DBf8', // The color of the value text when the wave overlaps it.
     toFixed: 0, // round value to this many decimal places
+    isVisible:true,
   };
 }
 
@@ -216,7 +218,8 @@ export const LiquidGauge = ({
 
   return (
     <View>
-      <Canvas style={{ width, height }}>
+      {mergedConfig.isVisible && 
+      <Canvas style={{ width, height }} pointerEvents="none">
         <Group>
           <Circle
             cx={radius}
@@ -258,6 +261,7 @@ export const LiquidGauge = ({
           </Group>
         </Group>
       </Canvas>
+    }
     </View>
   );
 };
